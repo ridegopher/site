@@ -7,10 +7,10 @@ class Home extends Component {
         if(!isLoggedIn) {
             return (
                 <React.Fragment>
-                    <Grid container spacing={16}>
+                    <Grid container spacing={24}>
                         <Grid item xs={12}>
                             <Grid container justify="center">
-                                <h1>I am the Mother Fucking Marketing Website</h1>
+                                <h1>Marketing Stuffz</h1>
                             </Grid>
                         </Grid>
                     </Grid>

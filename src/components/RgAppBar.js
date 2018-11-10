@@ -31,17 +31,18 @@ class RgAppBar extends Component {
     _auth() {
         const code = queryString.parse(window.location.search).code
         if (code && code != null) {
-            this.props.onStateChange('signing in',{});
+            this.props.onStateChange('signing in', {});
             window.history.pushState("authed", "Ride Gopher", "/");
             const authPromise = auth(code)
             authPromise.then(user => {
                 if (user.authenticated) {
-                    this.props.onStateChange('signedIn',{});
+                    this.props.onStateChange('signedIn', {});
                 }
             })
         }
 
     }
+
     render() {
         const {classes} = this.props;
         const isNotLoggedIn = this.props.authState !== 'signedIn';
@@ -49,14 +50,17 @@ class RgAppBar extends Component {
             <React.Fragment>
                 <AppBar position="sticky">
                     <Toolbar>
-                        <Typography variant="h6" color="inherit" className={classes.grow}>
-                            Ride Gopher
-                        </Typography>
+                        <div className={classes.grow}>
+                            <Typography variant="h4" color="inherit">
+                                Ride Gopher
+                            </Typography>
+                            <Typography variant="subtitle2" color="inherit" className={classes.grow}>
+                                Automate Strava
+                            </Typography>
+                        </div>
                         {isNotLoggedIn ? <Button color="inherit"
-                                    href={"https://www.strava.com/oauth/authorize?client_id=25651&response_type=code&redirect_uri=http://localhost:3000/auth"}><img
-                                src={"/connect.svg"} alt=""/></Button> :
-                            'logged in'
-                        }
+                                                 href={"https://www.strava.com/oauth/authorize?client_id=25651&response_type=code&redirect_uri=http://localhost:3000/auth"}><img
+                                src={"/connect.svg"} alt=""/></Button> : ""}
                     </Toolbar>
                 </AppBar>
             </React.Fragment>

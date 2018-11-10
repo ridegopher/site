@@ -10,7 +10,7 @@ query getAthlete{
 	measurement_preference
 	update_description:
 	username
-	activities{
+	activities {
 	  activity_type
 	  gear_id
 	  name_formats
