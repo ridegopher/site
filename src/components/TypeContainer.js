@@ -18,28 +18,27 @@ class TypeContainer extends Component {
                           alignItems="center"
                           style={{paddingBottom:40}}>
                         <Typography variant="h3" color="inherit" align="left">
-                            Activities
+                            Settings
                         </Typography>
-                        {this.props.athlete.activities.map(activity => (
-                            <Activity key={activity.activity_type} activity={activity}/>))}
                     </Grid>
                 </Grid>
-                <Grid item xs={12} spacing={40}>
-                    <Grid container
-                          direction="column"
-                          justify="space-evenly"
-                          alignItems="center">
-                        <Typography variant="h3" color="inherit" align="left">
-                            Commutes
-                        </Typography>
-                        {this.props.athlete.commutes.map(commute => (
-                            <Commute key={commute.name} commute={commute}/>))}
-                    </Grid>
-                </Grid>
-                <Button style={{position:"absolute", bottom: 50, right: 50}} variant="fab" color="primary" aria-label="Add">
-                    <AddIcon />
-                </Button>
-            </Grid>)
+                {/*<Grid item xs={12} spacing={40}>*/}
+                    {/*<Grid container*/}
+                          {/*direction="column"*/}
+                          {/*justify="space-evenly"*/}
+                          {/*alignItems="center">*/}
+                        {/*<Typography variant="h3" color="inherit" align="left">*/}
+                            {/*Commutes*/}
+                        {/*</Typography>*/}
+                        {/*{this.props.athlete.commutes.map(commute => (*/}
+                            {/*<Commute key={commute.name} commute={commute}/>))}*/}
+                    {/*</Grid>*/}
+                {/*</Grid>*/}
+                {/*<Button style={{position:"absolute", bottom: 50, right: 50}} variant="fab" color="primary" aria-label="Add">*/}
+                    {/*<AddIcon />*/}
+                {/*</Button>*/}
+            </Grid>
+        )
     }
 }
 
