@@ -34,7 +34,7 @@ const styles = theme => ({
     },
     helper: {
         borderLeft: `2px solid ${theme.palette.divider}`,
-        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+        padding: theme.spacing(2),
     },
     link: {
         color: theme.palette.primary.main,
@@ -45,14 +45,13 @@ const styles = theme => ({
     },
 });
 
-function Activity(props) {
+function Commute(props) {
     const { classes } = props;
     return (
-        <div className={classes.root}>
             <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <div className={classes.column}>
-                        <Typography className={classes.heading}>{props.activity.activity_type}</Typography>
+                        <Typography className={classes.heading}>Commute</Typography>
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails className={classes.details}>
@@ -67,12 +66,11 @@ function Activity(props) {
                     </Button>
                 </ExpansionPanelActions>
             </ExpansionPanel>
-        </div>
     );
 }
 
-Activity.propTypes = {
+Commute.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Activity);
+export default withStyles(styles)(Commute);
