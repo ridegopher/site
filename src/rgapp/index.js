@@ -3,7 +3,6 @@ import {graphqlOperation} from "aws-amplify";
 import {Connect} from "aws-amplify-react";
 import * as queries from '../graphql/queries';
 import {print as gqlToString} from 'graphql/language';
-import TypeContainer from "../components/TypeContainer";
 
 class RideGopherApp extends Component {
     render() {
@@ -15,7 +14,7 @@ class RideGopherApp extends Component {
                         {({data: {getAthlete}, loading, error}) => {
                             if (error) return (<h3>Error</h3>);
                             if (loading || !getAthlete) return (<h3>Loading...</h3>)
-                            return <TypeContainer athlete={getAthlete}/>
+                            return <div athlete={getAthlete}/>
                         }}
                     </Connect>
                 </React.Fragment>

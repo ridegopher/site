@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
-import MuiThemeProvider from "@material-ui/core/es/styles/MuiThemeProvider";
+import Amplify from 'aws-amplify';
+import {Authenticator} from 'aws-amplify-react';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import MuiThemeProvider from '@material-ui/core/es/styles/MuiThemeProvider';
 import theme from "./config/theme"
 import Home from "./home";
-import {Authenticator} from 'aws-amplify-react';
-import Amplify from 'aws-amplify';
-import RgAppBar from "./components/RgAppBar";
+import RgAppBar from "./components/appbar/RgAppBar";
 import RideGopherApp from "./rgapp";
+
 
 Amplify.configure({
     Auth: {
