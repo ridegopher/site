@@ -82,7 +82,7 @@ class Activity extends React.Component {
                                 <InputLabel htmlFor="gear">Gear</InputLabel>
                                 <Select
                                     id="gear"
-                                    value={activitySetting.gear.id}
+                                    value={activitySetting.gearId}
                                     onChange={e => onGearChange(e, activitySetting.id)}                     
                                  > 
                                     {userGear.map(g=> (

@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "ridegopher",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authridegopherc6a3968e",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

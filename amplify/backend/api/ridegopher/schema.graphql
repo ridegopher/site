@@ -1,0 +1,16 @@
+type UserSetting @model @key(fields: ["email"]) {
+  email: String!
+  dateFormat: String!
+  distanceFormat: String!
+  defaultDescriptionFormat: String!
+}
+
+type GearSetting @model 
+  @key(fields: ["id", "email"])
+  @key(name: "ByUser", fields: ["email"], queryField: "gearSettingByUser")
+{
+  id: ID!
+  email: String!
+  activityType: String!
+  gearId: String!
+}

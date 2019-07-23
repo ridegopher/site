@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+// import { PropTypes } from 'react'
 import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -31,7 +32,7 @@ class RgAppBar extends Component {
     _auth() {
         const code = queryString.parse(window.location.search).code
         if (code && code != null) {
-            this.props.onStateChange('signing in', {});
+            // this.props.onStateChange('signing in', {});
             window.history.pushState("authed", "Ride Gopher", "/");
             const authPromise = auth(code)
             authPromise.then(user => {

@@ -10,24 +10,28 @@ import Activity from "./Activity";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import gs from "../../api/GoRiderApi"
+import grs from "../../api/StravaApi";
+import uuid from "uuid";
 
-  const styles = theme => ({
+const styles = theme => ({
     root: {
         padding: theme.spacing(3, 2),
-      },
-      greenFab: {
+    },
+    greenFab: {
         margin: 10,
         color: '#fff',
         backgroundColor: green[500],
-      }
-  });
+    }
+});
 
 const gearService = gs();
+const grService = new grs();
 
 class ActivityList extends React.Component {
     state = {
-        activitySettings: [],
-        userGear: []
+        gearSettings: [],
+        userGear: [],
+        activityGear: [],
       };
      
     componentDidMount() {
@@ -36,54 +40,76 @@ class ActivityList extends React.Component {
     };
 
     loadGearSettings = () =>{
-        gearService.settings
-        .get({})
+        grService.getActivitySettings(this.props.email)
         .then(data => {
+            console.log(data)
             this.setState({
-                activitySettings: data.gearSettings
+                gearSettings: data
             });
         });
     };
 
     loadUserGear = () => {
-        gearService.gear
-        .list({})
+        grService.getUserGear()
         .then(data => {
             this.setState({
-                userGear: data.gear
+                userGear: data
             });
         });
     }
 
     handleActivityTypeChange = (e, id) => {
-        var setting = _.find(this.state.activitySettings, ['id', id])
+        var setting = _.find(this.state.gearSettings, ['id', id])
         _.set(setting, 'activityType', e.target.value)
         this.setState({
-            activitySettings: this.state.activitySettings
+            gearSettings: this.state.gearSettings,
+            activityGear: this.getActivityGearList(e.target.value)
           });
       };
 
+      getActivityGearList = (activityType) => {
+          var bikeActivities = ['Ride']
+          var shoeActivities = ['Run', 'Run Indoor', 'Walk']
+          if(bikeActivities.includes(activityType)){
+              return this.state.userGear.get('bikes')
+          }
+          if(shoeActivities.includes(activityType)){
+            return this.state.userGear.get('shoes')
+          }
+          return [];
+      }
+
       handleGearChange = (e, id) => {
-        var setting = _.find(this.state.activitySettings, ['id', id])
-        var selectedGear = _.find(this.state.userGear, ['id', e.target.value])
-        _.set(setting, 'gear', selectedGear)
+        var setting = _.find(this.state.gearSettings, ['id', id])
+        _.set(setting, 'gearId', e.target.value)
         this.setState({
-            activitySettings: this.state.activitySettings
+            gearSettings: this.state.gearSettings
         });
       };
 
-      handleSaveClick = event => {
+      handleSaveClick = (id) => {
         console.log("Call Save API")
+        var setting = _.find(this.state.gearSettings, ['id', id])
+        grService.saveGearSetting(setting)
       };
 
       handleRemoveClick = (id) => {
         this.setState({
-            activitySettings: this.state.activitySettings.filter(setting => setting.id !== id)
+            gearSettings: this.state.gearSettings.filter(setting => setting.id !== id)
         });
       };
 
       handleAddActivitySetting = event => {
-        console.log(event)
+        var newActivitySetting = {
+            id:uuid.v4(),
+            email:this.props.user.email,
+            activityType:'',
+            gearId:''
+        }
+        this.setState({
+            gearSettings: this.state.gearSettings.concat(newActivitySetting)
+        });
+
       }
     
     render(){
@@ -99,7 +125,7 @@ class ActivityList extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item xs={3} align='right'>
-                                <Fab color="secondary" aria-label="Add" className={classes.greenFab} onClick={() => this.handleAddActivitySetting()}>
+                                <Fab color="secondary" aria-label="Add" className={classes.greenFab} onClick={(e) => this.handleAddActivitySetting(e)}>
                                     <AddIcon />
                                 </Fab>                                
                             </Grid>
@@ -110,11 +136,11 @@ class ActivityList extends React.Component {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            {this.state.activitySettings.map( activitySetting => (
+                            {this.state.gearSettings.map( activitySetting => (
                                 <Activity 
                                 key={activitySetting.id}
                                 activitySetting={activitySetting}  
-                                userGear={this.state.userGear} 
+                                userGear={this.getActivityGearList(activitySetting.activityType)} 
                                 onActivityTypeChange={this.handleActivityTypeChange}
                                 onGearChange={this.handleGearChange}
                                 onSave={this.handleSaveClick} 

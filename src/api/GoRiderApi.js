@@ -8,7 +8,8 @@ const ACTIVITY_TYPES = [
   "Run",
   "Run Indoor",
   "Swim",
-  "Weights"
+  "Weights",
+  "Walk"
 ];
 
 const time = () => 1000 + Math.floor(Math.random() * 3000);
@@ -52,4 +53,5 @@ module.exports = function createGearSettingServiceSingleton(creds) {
   }
   return api;
 };
+
 module.exports.ACTIVITY_TYPES = ACTIVITY_TYPES;

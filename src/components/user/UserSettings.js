@@ -1,4 +1,5 @@
 import React from "react";
+import {withStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -8,17 +9,56 @@ import Container from '@material-ui/core/Container';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import gs from "../../api/StravaApi";
+
+const gearService = new gs();
+
+const styles = theme => ({
+    avatar: {
+        margin: 10,
+      },
+      bigAvatar: {
+        margin: 10,
+        width: 150,
+        height: 150,
+      }  
+})
 
 class UserSettings extends React.Component {
     state = {
-        dateFormat:'dd/mm/yyyy',
-        distanceFormat: 'k',
-        dateFormats: ['dd/mm/yyyy', 'mm/dd/yyyy'],
-        distanceFormats:[{format:'k', name:'Kilometers'}, {format:'m', name: 'Miles'}],
-        defaultDescriptionFormat:"1.2 Miles - Night Run - with RideGopher"
+        dateFormat:'',
+        distanceFormat: '',
+        dateFormats: ['dd/mm/yyyy', 'mm/dd/yyyy', '%m/%d/%Y'],
+        distanceFormats:[{format:'K', name:'Kilometers'}, {format:'M', name: 'Miles'}],
+        defaultDescriptionFormat:'',
+        athlete:{}
       };
 
+    componentDidMount(){
+        this.loadGearSettings()
+        this.loadAthlete()
+    }
+
+    loadGearSettings = async () =>{
+        let userSettings = await gearService.getDefaultSettings()
+        console.log(userSettings)
+        this.setState({
+            dateFormat:userSettings.dateFormat,
+            distanceFormat:userSettings.distanceFormat,
+            defaultDescriptionFormat:userSettings.defaultDescriptionFormat
+        })
+    };
+
+    loadAthlete = async () =>{
+        let athlete = await gearService.getStravaAthlete();
+        console.log(athlete)
+        this.setState({
+            athlete: athlete
+        })
+    }
+
     render(){
+        const { classes } = this.props;
         return(
             <Container maxWidth="lg" className="content">
                 <Paper className="UserSettings">
@@ -27,7 +67,8 @@ class UserSettings extends React.Component {
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={3}>
-                            <Avatar >JW</Avatar>
+                            <Avatar src={this.state.athlete.profile} className={classes.bigAvatar}>JW</Avatar>
+                            <span>{this.state.athlete.firstname} {this.state.athlete.lastname}</span>
                         </Grid>
                          <Grid item xs={6}>
                             <Grid item lg container direction="column" spacing={2}>
@@ -75,4 +116,4 @@ class UserSettings extends React.Component {
     };
 }
 
-export default UserSettings;
+export default withStyles(styles)(UserSettings);

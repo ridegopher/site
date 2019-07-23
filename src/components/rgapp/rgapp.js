@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {graphqlOperation} from "aws-amplify";
 import {Connect} from "aws-amplify-react";
-import * as queries from '../graphql/queries';
+import * as queries from '../../graphql/queries';
 import {print as gqlToString} from 'graphql/language';
 
 class RideGopherApp extends Component {

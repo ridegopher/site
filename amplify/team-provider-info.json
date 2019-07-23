@@ -1,0 +1,36 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "ridegopher-master-20190703085754-authRole",
+            "UnauthRoleArn": "arn:aws:iam::935407738622:role/ridegopher-master-20190703085754-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::935407738622:role/ridegopher-master-20190703085754-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "ridegopher-master-20190703085754-deployment",
+            "UnauthRoleName": "ridegopher-master-20190703085754-unauthRole",
+            "StackName": "ridegopher-master-20190703085754",
+            "StackId": "arn:aws:cloudformation:us-east-1:935407738622:stack/ridegopher-master-20190703085754/8e26e970-9d9a-11e9-ba2c-12713880e578"
+        },
+        "categories": {
+            "auth": {
+                "ridegopherc5c77f7c": {}
+            }
+        }
+    },
+    "personal": {
+        "awscloudformation": {
+            "AuthRoleName": "ridegopher-personal-20190703170319-authRole",
+            "UnauthRoleArn": "arn:aws:iam::702002224416:role/ridegopher-personal-20190703170319-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::702002224416:role/ridegopher-personal-20190703170319-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "ridegopher-personal-20190703170319-deployment",
+            "UnauthRoleName": "ridegopher-personal-20190703170319-unauthRole",
+            "StackName": "ridegopher-personal-20190703170319",
+            "StackId": "arn:aws:cloudformation:us-east-1:702002224416:stack/ridegopher-personal-20190703170319/5de12ed0-9dde-11e9-a0ed-0aa1af63e98c"
+        },
+        "categories": {
+            "auth": {
+                "ridegopherc6a3968e": {}
+            }
+        }
+    }
+}
